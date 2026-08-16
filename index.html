@@ -144,7 +144,6 @@
 
     <div class="container">
 
-        <!-- لۆگۆی پەیج -->
         <div class="logo-box">
             <img
                 src="https://i.ibb.co/3KP1hWw/photo_2026-08-16-15-28-36.jpg"
@@ -159,9 +158,8 @@
             سەردانی پەڕەکەمان بکە
         </p>
 
-        <!-- دوگمەی Facebook -->
         <a
-            href="https://www.facebook.com/healthy106"
+            href="https://www.facebook.com/share/17Y9YktJGC/?mibextid=wwXIfr"
             class="fb-btn"
             id="facebookBtn"
             aria-label="کردنەوەی پەیجی فەیسبووک"
@@ -184,55 +182,56 @@
 
     <script>
 
-        /*
-         * ==========================================
-         * FACEBOOK APP DEEP LINK
-         * ==========================================
-         */
+        const FACEBOOK_URL =
+            "https://www.facebook.com/share/17Y9YktJGC/?mibextid=wwXIfr";
 
-        const facebookPage = "https://www.facebook.com/healthy106";
-
-        const facebookButton =
+        const button =
             document.getElementById("facebookBtn");
 
 
-        facebookButton.addEventListener("click", function (event) {
+        button.addEventListener("click", function(event) {
 
             event.preventDefault();
 
 
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
 
 
             /*
-             * iPhone / iPad / iPod
-             *
-             * Facebook iOS deep link
+             * ==========================================
+             * ANDROID
+             * ==========================================
              */
-            if (/iPhone|iPad|iPod/i.test(userAgent)) {
 
-                const iosFacebookLink =
-                    "fb://profile/healthy106";
+            if (/Android/i.test(ua)) {
 
-                let fallbackTimer = setTimeout(function () {
+                /*
+                 * هەوڵی کردنەوەی Facebook App
+                 * بە Facebook Intent
+                 */
 
-                    window.location.href = facebookPage;
+                const androidIntent =
+                    "intent://share/17Y9YktJGC/#Intent;" +
+                    "scheme=https;" +
+                    "package=com.facebook.katana;" +
+                    "S.browser_fallback_url=" +
+                    encodeURIComponent(FACEBOOK_URL) +
+                    ";end";
 
-                }, 1800);
 
-
-                window.location.href = iosFacebookLink;
+                window.location.href = androidIntent;
 
 
                 /*
-                 * ئەگەر Facebook App کرا،
-                 * browser نابێت دووبارە Facebook Web بکاتەوە.
+                 * ئەگەر Facebook App نەکرایەوە
+                 * دەچێتە لینکە ڕاستەوخۆکە
                  */
-                window.addEventListener("pagehide", function () {
 
-                    clearTimeout(fallbackTimer);
+                setTimeout(function() {
 
-                }, { once: true });
+                    window.location.href = FACEBOOK_URL;
+
+                }, 2000);
 
 
                 return;
@@ -240,32 +239,62 @@
 
 
             /*
-             * Android
-             *
-             * Facebook Android deep link
+             * ==========================================
+             * iPHONE / iPAD
+             * ==========================================
              */
-            if (/Android/i.test(userAgent)) {
 
-                const androidFacebookLink =
-                    "fb://facewebmodal/f?href=" +
-                    encodeURIComponent(facebookPage);
+            if (/iPhone|iPad|iPod/i.test(ua)) {
+
+                /*
+                 * Facebook Universal Link
+                 *
+                 * یەکەم هەوڵ:
+                 * Facebook App
+                 */
+
+                const fbAppLink =
+                    "fb://share/17Y9YktJGC";
 
 
-                let fallbackTimer = setTimeout(function () {
+                let opened = false;
 
-                    window.location.href = facebookPage;
+
+                /*
+                 * هەوڵی کردنەوەی Facebook App
+                 */
+
+                window.location.href = fbAppLink;
+
+
+                /*
+                 * fallback
+                 */
+
+                setTimeout(function() {
+
+                    if (!opened) {
+
+                        window.location.href = FACEBOOK_URL;
+
+                    }
 
                 }, 1800);
 
 
-                window.location.href = androidFacebookLink;
+                /*
+                 * ئەگەر ئەپەکە کرایەوە
+                 */
 
+                document.addEventListener("visibilitychange", function() {
 
-                window.addEventListener("pagehide", function () {
+                    if (document.hidden) {
 
-                    clearTimeout(fallbackTimer);
+                        opened = true;
 
-                }, { once: true });
+                    }
+
+                });
 
 
                 return;
@@ -273,9 +302,12 @@
 
 
             /*
-             * Desktop / other devices
+             * ==========================================
+             * WINDOWS / MAC / OTHER
+             * ==========================================
              */
-            window.location.href = facebookPage;
+
+            window.location.href = FACEBOOK_URL;
 
         });
 
