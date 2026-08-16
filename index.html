@@ -5,38 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پەیجی تەندروستی و چارەسەر</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #0f172a;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #090d16);
             color: #ffffff;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            overflow: hidden;
         }
-        .btn {
-            background-color: #1877f2;
+
+        .container {
+            text-align: center;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-box {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #1877f2;
+            box-shadow: 0 0 25px rgba(24, 119, 242, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(24, 119, 242, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(24, 119, 242, 0); }
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        .fb-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #1877f2, #0d5dbf);
             color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
             text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: 0.3s;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
+            transition: all 0.3s ease;
         }
-        .btn:hover {
-            background-color: #145dbf;
+
+        .fb-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(24, 119, 242, 0.6);
+            background: linear-gradient(135deg, #166fe5, #0b4e9e);
+        }
+
+        .fb-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #64748b;
         }
     </style>
 </head>
 <body>
 
-    <!-- دوگمەی کردنەوەی ڕاستەوخۆی پەیجەکە -->
-    <a href="https://m.facebook.com/healthy106" target="_blank" class="btn">
-        کردنەوەی پەیجی تەندروستی و چارەسەر
-    </a>
+    <div class="container">
+        <!-- لۆگۆی بازنەیی پەیج -->
+        <div class="logo-box">
+            <img src="https://i.ibb.co/3KP1hWw/photo_2026-08-16-15-28-36.jpg" alt="پەیجی تەندروستی و چارەسەر">
+        </div>
+
+        <h1>پەیجی تەندروستی و چارەسەر</h1>
+        <p>بۆ بینینی بابەتی پزیشکی و تەندروستی، سەردانی پەڕەکەمان بکە</p>
+
+        <!-- دوگمەی فەیسبووک بە پڕوکسۆی ئەپ -->
+        <a href="https://www.facebook.com/healthy106" target="_blank" class="fb-btn">
+            <svg viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            لینکی فەیسبووک
+        </a>
+
+        <div class="footer-note">تەندروستی و چارەسەر © 2026</div>
+    </div>
 
 </body>
 </html>
