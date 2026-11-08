@@ -14,17 +14,66 @@
 
         body {
             background-color: #060709;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.05), transparent 70%),
-                linear-gradient(to right, rgba(0, 255, 102, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 51, 51, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
             color: #ffd700;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* باکگراوندی کاندڵی سەوز و سوری جووڵاو */
+        .candlestick-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .candle {
+            width: 14px;
+            border-radius: 3px;
+            position: relative;
+            animation: floatCandle 4s infinite ease-in-out alternate;
+        }
+
+        .candle::before, .candle::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+        }
+
+        .candle.green {
+            background-color: #00ff66;
+            box-shadow: 0 0 10px #00ff66;
+        }
+
+        .candle.green::before { top: -12px; height: 12px; background-color: #00ff66; }
+        .candle.green::after { bottom: -12px; height: 12px; background-color: #00ff66; }
+
+        .candle.red {
+            background-color: #ff334b;
+            box-shadow: 0 0 10px #ff334b;
+        }
+
+        .candle.red::before { top: -12px; height: 12px; background-color: #ff334b; }
+        .candle.red::after { bottom: -12px; height: 12px; background-color: #ff334b; }
+
+        @keyframes floatCandle {
+            0% { transform: translateY(0px); scaleY(1); }
+            50% { transform: translateY(-15px); scaleY(1.1); }
+            100% { transform: translateY(10px); scaleY(0.95); }
         }
 
         header {
@@ -54,172 +103,4 @@
         }
 
         .status-badge {
-            font-size: 13px;
-            color: #00ff66;
-            background: rgba(0, 255, 102, 0.1);
-            border: 1px solid #00ff66;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-top: 8px;
-            display: inline-block;
-        }
-
-        .dashboard {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .panel {
-            background: rgba(15, 17, 21, 0.85);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
-        }
-
-        .panel-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffd700;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            padding-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price-box {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            margin-bottom: 15px;
-        }
-
-        .price-title {
-            font-size: 13px;
-            color: #a0a5b5;
-            margin-bottom: 5px;
-        }
-
-        .price-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: #00ff66;
-            text-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed rgba(255, 215, 0, 0.15);
-            padding-bottom: 6px;
-        }
-
-        .btn-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, #ffd700, #c59b00);
-            color: #000;
-            text-decoration: none;
-            padding: 14px;
-            font-weight: bold;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: 0.3s;
-            margin-bottom: 12px;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.25);
-        }
-
-        .btn-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-            background: linear-gradient(135deg, #ffea66, #ffd700);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 215, 0, 0.1);
-            color: #ffd700;
-            border: 1px solid #ffd700;
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 215, 0, 0.25);
-            color: #fff;
-        }
-
-        footer {
-            margin-top: 30px;
-            font-size: 12px;
-            color: #7a7f8d;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <img src="https://i.ibb.co/hwCJFPx/image.jpg" alt="مام سۆڵ" class="profile-img">
-        <h1>مام سۆڵ 🦂</h1>
-        <div class="status-badge">شیکارکاری بەئەزموونی بازاڕی زێڕ (XAUUSD) 🟢</div>
-    </header>
-
-    <div class="dashboard">
-
-        <div class="panel">
-            <div class="panel-title">
-                <span>بازاڕی زێڕ (XAUUSD)</span>
-                <span style="color: #00ff66;">Bullish 🚀</span>
-            </div>
-            <div class="price-box">
-                <div class="price-title">نرخی لایڤی زێڕ</div>
-                <div class="price-value" id="goldPrice">$2,748.50</div>
-            </div>
-            <div class="info-row"><span>ئاراستەی گشتی:</span> <span style="color: #00ff66;">بەرزبوونەوە (کڕین)</span></div>
-            <div class="info-row"><span>ڕێژەی سەرکەوتنی شیکاری:</span> <span style="color: #ffd700;">94.2%</span></div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-title">کەناڵ و پەیوەندییەکان</div>
-
-            <a href="https://t.me/soulyaxi7" target="_blank" class="btn-link">
-                📢 چوونە ناو کەناڵی گشتی تێلیگرام
-            </a>
-
-            <a href="https://t.me/soulyaxi" target="_blank" class="btn-link btn-secondary">
-                👑 داخڵبوونی گروپی تایبەت (VIP)
-            </a>
-
-            <a href="https://t.me/soulyaxi" target="_blank" class="btn-link btn-secondary">
-                💬 پەیوەندیکردن بە مام سۆڵ
-            </a>
-        </div>
-
-    </div>
-
-    <footer>کەناڵی فەرمی مام سۆڵ © 2026</footer>
-
-    <script>
-        setInterval(() => {
-            const priceEl = document.getElementById('goldPrice');
-            let currentPrice = parseFloat(priceEl.innerText.replace('$', '').replace(',', ''));
-            let randomChange = (Math.random() * 1.4 - 0.65).toFixed(2);
-            let newPrice = (currentPrice + parseFloat(randomChange)).toFixed(2);
-            priceEl.innerText = '$' + Number(newPrice).toLocaleString();
-        }, 1200);
-    </script>
-
-</body>
-</html>
+            font-size
