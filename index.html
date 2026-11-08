@@ -14,22 +14,32 @@
 
         body {
             background-color: #060709;
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.05), transparent 70%),
-                linear-gradient(to right, rgba(0, 255, 102, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 51, 51, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
             color: #ffd700;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas بۆ باکگراوندی جووڵاوی مۆمەکان */
+        #candlesCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.25;
+            pointer-events: none;
         }
 
         header {
             text-align: center;
             margin-bottom: 25px;
+            z-index: 1;
         }
 
         .profile-img {
@@ -70,6 +80,7 @@
             gap: 20px;
             max-width: 600px;
             width: 100%;
+            z-index: 1;
         }
 
         .panel {
@@ -93,35 +104,42 @@
             align-items: center;
         }
 
-        .price-box {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            margin-bottom: 15px;
-        }
-
-        .price-title {
-            font-size: 13px;
-            color: #a0a5b5;
-            margin-bottom: 5px;
-        }
-
-        .price-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: #00ff66;
-            text-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
-        }
-
-        .info-row {
+        .rules-list {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rule-item {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-right: 4px solid #ffd700;
+            padding: 12px 15px;
+            border-radius: 8px;
+        }
+
+        .rule-item.green {
+            border-right-color: #00ff66;
+        }
+
+        .rule-item.red {
+            border-right-color: #ff3333;
+        }
+
+        .rule-title {
             font-size: 14px;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed rgba(255, 215, 0, 0.15);
-            padding-bottom: 6px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-desc {
+            font-size: 13px;
+            color: #bfa15f;
+            line-height: 1.5;
         }
 
         .btn-link {
@@ -165,10 +183,14 @@
             font-size: 12px;
             color: #7a7f8d;
             text-align: center;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+
+    <!-- کاندڵە جووڵاوەکان -->
+    <canvas id="candlesCanvas"></canvas>
 
     <header>
         <img src="https://i.ibb.co/hwCJFPx/image.jpg" alt="مام سۆڵ" class="profile-img">
@@ -178,19 +200,32 @@
 
     <div class="dashboard">
 
+        <!-- بەشی یاساکانی مام سۆڵ (سایکۆلۆژیا، سێتئەپ و ڕیسک) -->
         <div class="panel">
             <div class="panel-title">
-                <span>بازاڕی زێڕ (XAUUSD)</span>
-                <span style="color: #00ff66;">Bullish 🚀</span>
+                <span>یاسا زێڕینەکانی مام سۆڵ ⚖️</span>
+                <span style="color: #00ff66;">PRO TRADER</span>
             </div>
-            <div class="price-box">
-                <div class="price-title">نرخی لایڤی زێڕ</div>
-                <div class="price-value" id="goldPrice">$2,748.50</div>
+            
+            <div class="rules-list">
+                <div class="rule-item green">
+                    <div class="rule-title">🧠 سایکۆلۆژیای بازاڕ (Trading Psychology)</div>
+                    <div class="rule-desc">کۆنتڕۆڵی هەستەکانت بکە. چڵێسی و تۆڵەکردنەوە لە بازاڕ گەورەترین دوژمنی ترەیدەرن. بە بێدەنگی و ئارامی کار بکە.</div>
+                </div>
+
+                <div class="rule-item">
+                    <div class="rule-title">🎯 سێتئەپی پۆزشن (Trade Setup)</div>
+                    <div class="rule-desc">هیچ پۆزشنێک مەکەرەوە بەبێ پشتڕاستکردنەوە (Confirmation). تەنها لە شوێنی ستراتیژی دیاریکراوی خۆت بەپێی پلان ترید بکە.</div>
+                </div>
+
+                <div class="rule-item red">
+                    <div class="rule-title">🛡️ بەڕێوەبردنی ڕیسک (Risk : Reward)</div>
+                    <div class="rule-desc">ڕێژەی Risk:Reward لە 1:2 کەمتر قبوڵ مەکە. لە هەر تریدێکدا زیاتر لە 1% بۆ 2%ی سەرمایەکەت مەخەرە ڕیسکەوە.</div>
+                </div>
             </div>
-            <div class="info-row"><span>ئاراستەی گشتی:</span> <span style="color: #00ff66;">بەرزبوونەوە (کڕین)</span></div>
-            <div class="info-row"><span>ڕێژەی سەرکەوتنی شیکاری:</span> <span style="color: #ffd700;">94.2%</span></div>
         </div>
 
+        <!-- بەشی بەستەر و کەناڵەکان -->
         <div class="panel">
             <div class="panel-title">کەناڵ و پەیوەندییەکان</div>
 
@@ -212,13 +247,62 @@
     <footer>کەناڵی فەرمی مام سۆڵ © 2026</footer>
 
     <script>
-        setInterval(() => {
-            const priceEl = document.getElementById('goldPrice');
-            let currentPrice = parseFloat(priceEl.innerText.replace('$', '').replace(',', ''));
-            let randomChange = (Math.random() * 1.4 - 0.65).toFixed(2);
-            let newPrice = (currentPrice + parseFloat(randomChange)).toFixed(2);
-            priceEl.innerText = '$' + Number(newPrice).toLocaleString();
-        }, 1200);
+        // سکریپتی دروستکردنی مۆمە سەوز و سورەکان لە باکگراوند (Animated Candlesticks)
+        const canvas = document.getElementById('candlesCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const candles = [];
+        const candleCount = 25;
+
+        for (let i = 0; i < candleCount; i++) {
+            candles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                width: Math.random() * 8 + 6,
+                bodyHeight: Math.random() * 40 + 20,
+                wickHeight: Math.random() * 20 + 15,
+                isBullish: Math.random() > 0.4, // سەوز یان سور
+                speed: Math.random() * 0.7 + 0.3
+            });
+        }
+
+        function drawCandles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            candles.forEach(c => {
+                const color = c.isBullish ? '#00ff66' : '#ff3333';
+                ctx.fillStyle = color;
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 1.5;
+
+                // کێشانی فیتیلەی مۆمەکە (Wick)
+                ctx.beginPath();
+                ctx.moveTo(c.x + c.width / 2, c.y - c.wickHeight);
+                ctx.lineTo(c.x + c.width / 2, c.y + c.bodyHeight + c.wickHeight);
+                ctx.stroke();
+
+                // کێشانی جەستەی مۆمەکە (Body)
+                ctx.fillRect(c.x, c.y, c.width, c.bodyHeight);
+
+                // جووڵانی مۆمەکان بەرەو سەرەوە
+                c.y -= c.speed;
+                if (c.y + c.bodyHeight + c.wickHeight < 0) {
+                    c.y = canvas.height + c.wickHeight;
+                    c.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(drawCandles);
+        }
+
+        drawCandles();
     </script>
 
 </body>
