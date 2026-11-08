@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>پەیجی تەندروستی و چارەسەر</title>
-
+    <title>مام سۆڵ 🦂 | mam soul</title>
     <style>
         * {
             box-sizing: border-box;
@@ -15,302 +13,212 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b, #090d16);
-            color: #ffffff;
-            height: 100vh;
+            background-color: #060709;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.05), transparent 70%),
+                linear-gradient(to right, rgba(0, 255, 102, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 51, 51, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: #ffd700;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            overflow: hidden;
+            padding: 20px;
         }
 
-        .container {
+        header {
             text-align: center;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1.2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo-box {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #1877f2;
-            box-shadow: 0 0 25px rgba(24, 119, 242, 0.6);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.7);
-            }
-
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 15px rgba(24, 119, 242, 0);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(24, 119, 242, 0);
-            }
-        }
-
-        .logo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        p {
-            font-size: 14px;
-            color: #94a3b8;
             margin-bottom: 25px;
         }
 
-        .fb-btn {
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            object-fit: cover;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+            margin-bottom: 12px;
+            aspect-ratio: 1 / 1;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #1877f2, #0d5dbf);
-            color: white;
-            text-decoration: none;
-            padding: 16px 20px;
-            border-radius: 12px;
+            gap: 10px;
+        }
+
+        .status-badge {
+            font-size: 13px;
+            color: #00ff66;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid #00ff66;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .panel {
+            background: rgba(15, 17, 21, 0.85);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+        }
+
+        .panel-title {
             font-size: 16px;
             font-weight: bold;
-            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
+            color: #ffd700;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .fb-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(24, 119, 242, 0.6);
-            background: linear-gradient(135deg, #166fe5, #0b4e9e);
+        .price-box {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            margin-bottom: 15px;
         }
 
-        .fb-btn:active {
-            transform: scale(0.97);
+        .price-title {
+            font-size: 13px;
+            color: #a0a5b5;
+            margin-bottom: 5px;
         }
 
-        .fb-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: white;
-            flex-shrink: 0;
+        .price-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00ff66;
+            text-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
         }
 
-        .footer-note {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #64748b;
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed rgba(255, 215, 0, 0.15);
+            padding-bottom: 6px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #ffd700, #c59b00);
+            color: #000;
+            text-decoration: none;
+            padding: 14px;
+            font-weight: bold;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: 0.3s;
+            margin-bottom: 12px;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.25);
+        }
+
+        .btn-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #ffea66, #ffd700);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            border: 1px solid #ffd700;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 215, 0, 0.25);
+            color: #fff;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #7a7f8d;
+            text-align: center;
         }
     </style>
 </head>
-
 <body>
 
-    <div class="container">
+    <header>
+        <img src="https://i.ibb.co/hwCJFPx/image.jpg" alt="مام سۆڵ" class="profile-img">
+        <h1>مام سۆڵ 🦂</h1>
+        <div class="status-badge">شیکارکاری بەئەزموونی بازاڕی زێڕ (XAUUSD) 🟢</div>
+    </header>
 
-        <div class="logo-box">
-            <img
-                src="https://i.ibb.co/3KP1hWw/photo_2026-08-16-15-28-36.jpg"
-                alt="پەیجی تەندروستی و چارەسەر"
-            >
+    <div class="dashboard">
+
+        <div class="panel">
+            <div class="panel-title">
+                <span>بازاڕی زێڕ (XAUUSD)</span>
+                <span style="color: #00ff66;">Bullish 🚀</span>
+            </div>
+            <div class="price-box">
+                <div class="price-title">نرخی لایڤی زێڕ</div>
+                <div class="price-value" id="goldPrice">$2,748.50</div>
+            </div>
+            <div class="info-row"><span>ئاراستەی گشتی:</span> <span style="color: #00ff66;">بەرزبوونەوە (کڕین)</span></div>
+            <div class="info-row"><span>ڕێژەی سەرکەوتنی شیکاری:</span> <span style="color: #ffd700;">94.2%</span></div>
         </div>
 
-        <h1>پەیجی تەندروستی و چارەسەر</h1>
+        <div class="panel">
+            <div class="panel-title">کەناڵ و پەیوەندییەکان</div>
 
-        <p>
-            بۆ بینینی بابەتی پزیشکی و تەندروستی،
-            سەردانی پەڕەکەمان بکە
-        </p>
+            <a href="https://t.me/soulyaxi7" target="_blank" class="btn-link">
+                📢 چوونە ناو کەناڵی گشتی تێلیگرام
+            </a>
 
-        <a
-            href="https://www.facebook.com/share/17Y9YktJGC/?mibextid=wwXIfr"
-            class="fb-btn"
-            id="facebookBtn"
-            aria-label="کردنەوەی پەیجی فەیسبووک"
-        >
+            <a href="https://t.me/soulyaxi" target="_blank" class="btn-link btn-secondary">
+                👑 داخڵبوونی گروپی تایبەت (VIP)
+            </a>
 
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-
-            لینکی فەیسبووک
-
-        </a>
-
-        <div class="footer-note">
-            تەندروستی و چارەسەر © 2026
+            <a href="https://t.me/soulyaxi" target="_blank" class="btn-link btn-secondary">
+                💬 پەیوەندیکردن بە مام سۆڵ
+            </a>
         </div>
 
     </div>
 
+    <footer>کەناڵی فەرمی مام سۆڵ © 2026</footer>
 
     <script>
-
-        const FACEBOOK_URL =
-            "https://www.facebook.com/share/17Y9YktJGC/?mibextid=wwXIfr";
-
-        const button =
-            document.getElementById("facebookBtn");
-
-
-        button.addEventListener("click", function(event) {
-
-            event.preventDefault();
-
-
-            const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-
-            /*
-             * ==========================================
-             * ANDROID
-             * ==========================================
-             */
-
-            if (/Android/i.test(ua)) {
-
-                /*
-                 * هەوڵی کردنەوەی Facebook App
-                 * بە Facebook Intent
-                 */
-
-                const androidIntent =
-                    "intent://share/17Y9YktJGC/#Intent;" +
-                    "scheme=https;" +
-                    "package=com.facebook.katana;" +
-                    "S.browser_fallback_url=" +
-                    encodeURIComponent(FACEBOOK_URL) +
-                    ";end";
-
-
-                window.location.href = androidIntent;
-
-
-                /*
-                 * ئەگەر Facebook App نەکرایەوە
-                 * دەچێتە لینکە ڕاستەوخۆکە
-                 */
-
-                setTimeout(function() {
-
-                    window.location.href = FACEBOOK_URL;
-
-                }, 2000);
-
-
-                return;
-            }
-
-
-            /*
-             * ==========================================
-             * iPHONE / iPAD
-             * ==========================================
-             */
-
-            if (/iPhone|iPad|iPod/i.test(ua)) {
-
-                /*
-                 * Facebook Universal Link
-                 *
-                 * یەکەم هەوڵ:
-                 * Facebook App
-                 */
-
-                const fbAppLink =
-                    "fb://share/17Y9YktJGC";
-
-
-                let opened = false;
-
-
-                /*
-                 * هەوڵی کردنەوەی Facebook App
-                 */
-
-                window.location.href = fbAppLink;
-
-
-                /*
-                 * fallback
-                 */
-
-                setTimeout(function() {
-
-                    if (!opened) {
-
-                        window.location.href = FACEBOOK_URL;
-
-                    }
-
-                }, 1800);
-
-
-                /*
-                 * ئەگەر ئەپەکە کرایەوە
-                 */
-
-                document.addEventListener("visibilitychange", function() {
-
-                    if (document.hidden) {
-
-                        opened = true;
-
-                    }
-
-                });
-
-
-                return;
-            }
-
-
-            /*
-             * ==========================================
-             * WINDOWS / MAC / OTHER
-             * ==========================================
-             */
-
-            window.location.href = FACEBOOK_URL;
-
-        });
-
+        setInterval(() => {
+            const priceEl = document.getElementById('goldPrice');
+            let currentPrice = parseFloat(priceEl.innerText.replace('$', '').replace(',', ''));
+            let randomChange = (Math.random() * 1.4 - 0.65).toFixed(2);
+            let newPrice = (currentPrice + parseFloat(randomChange)).toFixed(2);
+            priceEl.innerText = '$' + Number(newPrice).toLocaleString();
+        }, 1200);
     </script>
 
 </body>
